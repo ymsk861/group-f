@@ -5,6 +5,7 @@ import time
 from flask import Flask, render_template, request
 from wtforms import Form, FloatField, SubmitField, validators, ValidationError
 import matplotlib.pyplot as plt
+import joblib
  
 
 # setup 
@@ -30,7 +31,7 @@ dom_em_type = 'ワハハハ'
     def bbb():
         return render_template('')
 """
-@app.route('/',  methods = ['GET', 'POST'])
+# @app.route('/',  methods = ['GET', 'POST'])
 def detect_face():
     # while(True): # 下でreturnしているので表情を読み取るのは1回です
 
@@ -78,7 +79,8 @@ def detect_face():
         else:
             print(dom_em_type,dom_em_conf)
             print(sec_em_type,sec_em_conf,'\n')
-    # return dom_em_type
+    return [dom_em_type, dom_em_conf]
+    #joblib.dump(dom_em_type, "dom_em_type.pkl", compress=True)
 
     # When everything done, release the capture
 
@@ -86,8 +88,8 @@ def detect_face():
     cv2.destroyAllWindows()
 
     # return 
-# @app.route('/', methods = ['GET', 'POST'])
-# def aaa():
+@app.route('/', methods = ['GET', 'POST'])
+def aaa():
     print(request.method)
     if request.method == 'GET':
         return render_template('first.html')
@@ -98,7 +100,9 @@ def detect_face():
         # カメラ起動 + 認識
         # emothions = detect_face()
         # print(emothions)
+        dom_em_type = detect_face()
 
+        # dom_em_type = joblib.load('./dom_em_type.pkl')
         # 顔データ送信 emotions : [{'Type': 'CALM', 'Confidence': 92.8204574584961}, {'Type': 'SURPRISED', 'Confidence': 3.136558771133423}, ...]
         return render_template('second.html', dom_em_type=dom_em_type)
 
