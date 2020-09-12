@@ -21,11 +21,30 @@ fontface = cv2.FONT_HERSHEY_DUPLEX
 
 # flask
 app = Flask(__name__)
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def aaa():
-    return render_template('first.html')
+    print(request.method)
+    if request.method == 'GET':
+        return render_template('first.html')
+    
+    # firstのスタートボタンを押すと実行
+    elif request.method == 'POST':
+        
+        # カメラ起動 + 認識
+        emotions = detect_face()
+        print(emotions)
+
+        # 顔データ送信 emotions : [{'Type': 'CALM', 'Confidence': 92.8204574584961}, {'Type': 'SURPRISED', 'Confidence': 3.136558771133423}, ...]
+        return render_template('second.html', emotions=emotions)
+
 """
-    while(True):
+@app.route('/camera')
+    def bbb():
+        return render_template('')
+"""
+
+def detect_face():
+    while(True): # 下でreturnしているので表情を読み取るのは1回です
 
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -69,17 +88,20 @@ def aaa():
             else:
                 print(dom_em_type,dom_em_conf)
                 print(sec_em_type,sec_em_conf,'\n')
-
-            
-    # Display the resulting frame
-        cv2.imshow('frame', frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        return emothions
 
     # When everything done, release the capture
     cap.release()
     cv2.destroyAllWindows()
-"""
+    return 
 
 if __name__ == "__main__":
     app.run()     
+
+# カメラ画像を画面に表示したい場合は96行目に以下のコードを書く
+"""
+# Display the resulting frame
+cv2.imshow('frame', frame)
+if cv2.waitKey(1) & 0xFF == ord('q'):
+    break
+"""
