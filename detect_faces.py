@@ -2,26 +2,28 @@ import cv2
 import numpy as np
 import boto3
 import time
+from flask import Flask, render_template, request
+from wtforms import Form, FloatField, SubmitField, validators, ValidationError
 import matplotlib.pyplot as plt
  
-# Setup
+
+# setup 
 scale_factor = .15
 green = (0,255,0)
 red = (0,0,255)
 frame_thickness = 2
 cap = cv2.VideoCapture(0)
-rekognition = boto3.client('rekognition',region_name='us-west-2')
-
-# font-size
+rekognition = boto3.client('rekognition', region_name='us-west-2')
 fontscale = 1.0
-# font-color (B, G, R)
 color = (0, 120, 238)
-# font
 fontface = cv2.FONT_HERSHEY_DUPLEX
 
+
+# flask
+app = Flask(__name__)
 @app.route('/')
 def aaa():
-    return render_template('index.html', form=form)
+    return render_template('first.html')
 """
     while(True):
 
@@ -78,4 +80,6 @@ def aaa():
     cap.release()
     cv2.destroyAllWindows()
 """
-        
+
+if __name__ == "__main__":
+    app.run()     
