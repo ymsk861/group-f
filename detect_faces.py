@@ -21,6 +21,9 @@ fontface = cv2.FONT_HERSHEY_DUPLEX
 
 # flask
 app = Flask(__name__)
+
+# dom_em_type = 'ワハハハ'
+
 @app.route('/', methods = ['GET', 'POST'])
 def aaa():
     print(request.method)
@@ -31,11 +34,11 @@ def aaa():
     elif request.method == 'POST':
         
         # カメラ起動 + 認識
-        emotions = detect_face()
-        print(emotions)
+        # emothions = dom_em_type
+        # print(emothions)
 
         # 顔データ送信 emotions : [{'Type': 'CALM', 'Confidence': 92.8204574584961}, {'Type': 'SURPRISED', 'Confidence': 3.136558771133423}, ...]
-        return render_template('second.html', emotions=emotions)
+        return render_template('second.html', dom_em_type=dom_em_type)
 
 """
 @app.route('/camera')
@@ -56,6 +59,8 @@ def detect_face():
 
         # Detect faces in jpg
         faces = rekognition.detect_faces(Image={'Bytes':buf.tobytes()}, Attributes=['ALL'])
+
+        
 
         # Draw rectangle around faces
         for face in faces['FaceDetails']:
@@ -94,6 +99,9 @@ def detect_face():
     cap.release()
     cv2.destroyAllWindows()
     return 
+
+
+
 
 if __name__ == "__main__":
     app.run()     
