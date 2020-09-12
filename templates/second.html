@@ -25,6 +25,7 @@
         <h1><em>カメラから表情を読み取り感情を予想し円グラフにします</em></h1>
         <hr>
         <h3>現在の円グラフ(約10秒ごとに更新されます)</h3>
+         {{ dom_em_type[0] }}が{{dom_em_type[1]}}　％です
         <span id="view_time"></span>
 
 <script type="text/javascript">
@@ -54,12 +55,17 @@ function getNow() {
   //
   // flaskから受け取った変数定義してlabelsとdataに反映させて下さい
   //
+  // let dom_em_type_js = {{ dom_em_type[0] }}
+  // let dom_em_conf_js = {{ dom_em_type[1] }}
+
+  // let x = 100 - dom_em_conf_js
 
   var ctx = document.getElementById("myPieChart");
   var myPieChart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: ["calm(穏やか)", "disugusted(イライラ)", "suprised(驚き)", "sad(悲しみ)","happy(幸せ)","confused(困惑)","Angry(怒り)"],
+      labels: ["calm(落ち着いている)", "disugusted(イライラ)", "suprised(驚き)", "sad(悲しみ)","happy(幸せ)","confused(困惑)","Angry(怒り)"],
+      // labels: [dom_em_type_js, "disugusted(イライラ)", "suprised(驚き)", "sad(悲しみ)","happy(幸せ)","confused(困惑)","Angry(怒り)"],
       datasets: [{
           backgroundColor: [
               "#07EBEB",
@@ -74,6 +80,7 @@ function getNow() {
                 
           ],
           data: [38, 4, 21, 10, 22, 2, 2,]　//数値指定
+          // data: [dom_em_conf_js, x , 0, 0, 0, 0, 0,]　//数値指定
       }]
     },
     options: {
