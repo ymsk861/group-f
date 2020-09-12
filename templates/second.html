@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <meta http-equiv="refresh" content="10; URL=second.html">
+        <meta http-equiv="refresh" content="10; URL=/">
         <title>Document</title>
         <title>team-f</title>
         
@@ -26,6 +26,7 @@
         <hr>
         <h3>現在の円グラフ(約10秒ごとに更新されます)</h3>
          {{ dom_em_type[0] }}が{{dom_em_type[1]}}　％です
+        
         <span id="view_time"></span>
 
 <script type="text/javascript">
@@ -58,7 +59,7 @@ function getNow() {
   // let dom_em_type_js = {{ dom_em_type[0] }}
   // let dom_em_conf_js = {{ dom_em_type[1] }}
 
-  // let x = 100 - dom_em_conf_js
+  // let others_rate = 100 - dom_em_conf_js
 
   var ctx = document.getElementById("myPieChart");
   var myPieChart = new Chart(ctx, {
@@ -80,7 +81,7 @@ function getNow() {
                 
           ],
           data: [38, 4, 21, 10, 22, 2, 2,]　//数値指定
-          // data: [dom_em_conf_js, x , 0, 0, 0, 0, 0,]　//数値指定
+          // data: [dom_em_conf_js, others_rate , 0, 0, 0, 0, 0,]　//数値指定
       }]
     },
     options: {
