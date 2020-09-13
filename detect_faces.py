@@ -88,6 +88,9 @@ def detect_face():
     cv2.destroyAllWindows()
 
     # return 
+
+#スタートボタンを押す（＝http://127.0.0.1:5000/が再読み込まれる）と93行目から再読み込みされる（この時request.method='POST'）
+#自動リロードされる場合も同じ（この時request.method='GET'）
 @app.route('/', methods = ['GET', 'POST'])
 def aaa():
     print(request.method)
@@ -100,7 +103,7 @@ def aaa():
         # カメラ起動 + 認識
         # emothions = detect_face()
         # print(emothions)
-        dom_em_type = detect_face()
+        dom_em_type = detect_face()#スタートボタン押してからカメラ起動
 
         # dom_em_type = joblib.load('./dom_em_type.pkl')
         # 顔データ送信 emotions : [{'Type': 'CALM', 'Confidence': 92.8204574584961}, {'Type': 'SURPRISED', 'Confidence': 3.136558771133423}, ...]
