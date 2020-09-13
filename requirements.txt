@@ -29,7 +29,6 @@ urllib3==1.23
 Werkzeug==1.0.1
 WTForms==2.3.3
 gnuplot
-heroku/brew/heroku
 node
 nodebrew
 portaudio
