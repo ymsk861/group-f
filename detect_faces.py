@@ -92,7 +92,7 @@ def detect_face():
 def aaa():
     print(request.method)
     if request.method == 'GET':
-        return render_template('first.html')
+        return render_template('index.html')
     
     # firstのスタートボタンを押すと実行
     elif request.method == 'POST':

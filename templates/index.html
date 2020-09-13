@@ -1,23 +1,38 @@
-<title>Iris Predict App</title>
-<style>
-    #wrapper {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+    h1{
         text-align: center;
     }
-</style>
-<div id="wrapper">
-    <form method="post">
-        {{ form.SepalLength.label }}<br>
-        {{ form.SepalLength }}
-        <br>
-        {{ form.SepalWidth.label }}<br>
-        {{ form.SepalWidth }}
-        <br>
-        {{ form.PetalLength.label }}<br>
-        {{ form.PetalLength }}
-        <br>
-        {{ form.PetalWidth.label }}<br>
-        {{ form.PetalWidth }}
-        <br>
-        {{ form.submit }}
+    h2{
+        text-align: center;
+    }
+    h5{
+        text-align: center;
+    }
+    a{
+        text-align: center;
+    }
+    
+    </style>
+</head>
+<body>
+    
+    <h1>Team-fの開発</h1>
+    <h2>カメラを起動し表情を分析します</h2>
+    <h5>円グラフに表示されます</h5>
+
+
+    <!-- <button onclick='location.href="second.html" '>スタート</button> -->
+    
+    <form action="/" method="POST">
+      <input type="submit" value="カメラ起動 + 認識">
     </form>
-</div>
+
+</body>
+</html>
