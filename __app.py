@@ -46,7 +46,7 @@ class IrisForm(Form):
     # html側で表示するsubmitボタンの表示
     submit = SubmitField("判定")
 
-@app.route('/__index/html', methods = ['GET', 'POST'])
+@app.route('/__index.html', methods = ['GET', 'POST'])
 def predicts():
     form = IrisForm(request.form)
     if request.method == 'POST':
