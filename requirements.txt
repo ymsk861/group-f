@@ -16,7 +16,7 @@ matplotlib==3.3.1
 numpy==1.17.3
 opencv-python==3.4.8.29
 Pillow==7.2.0
-PyAudio==0.2.11
+# PyAudio==0.2.11
 pyparsing==2.4.7
 python-dateutil==2.7.3
 s3transfer==0.1.13
@@ -28,4 +28,4 @@ threadpoolctl==2.1.0
 urllib3==1.23
 Werkzeug==1.0.1
 WTForms==2.3.3
-portaudio==19.6.0
+# portaudio==19.6.0
