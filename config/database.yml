@@ -1,0 +1,4 @@
+production:
+  <<: *default
+  adapter: pg
+  database: db/production.pg
