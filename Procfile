@@ -1,1 +1,1 @@
-web: gunicorn app:detect_faces --log-file=-
+web: gunicorn app:detect_faces:app --log-file=-
