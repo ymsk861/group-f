@@ -33,59 +33,68 @@ dom_em_type = 'ワハハハ'
 """
 # @app.route('/',  methods = ['GET', 'POST'])
 def detect_face():
-    # while(True): # 下でreturnしているので表情を読み取るのは1回です
+    while True:
+        # while(True): # 下でreturnしているので表情を読み取るのは1回です
 
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-    height, width, channels = frame.shape
+        # Capture frame-by-frame
+        ret, frame = cap.read()
+        height, width, channels = frame.shape
 
-    # Convert frame to jpg
-    small = cv2.resize(frame, (int(width * scale_factor), int(height * scale_factor)))
-    ret, buf = cv2.imencode('.jpg', small)
+        # Convert frame to jpg
+        small = cv2.resize(frame, (int(width * scale_factor), int(height * scale_factor)))
+        ret, buf = cv2.imencode('.jpg', small)
 
-    # Detect faces in jpg
-    faces = rekognition.detect_faces(Image={'Bytes':buf.tobytes()}, Attributes=['ALL'])
+        # Detect faces in jpg
+        faces = rekognition.detect_faces(Image={'Bytes':buf.tobytes()}, Attributes=['ALL'])
 
-    
 
-    # Draw rectangle around faces
-    for face in faces['FaceDetails']:
-        smile = face['Smile']['Value']
-        cv2.rectangle(frame,
-                    (int(face['BoundingBox']['Left']*width),
-                    int(face['BoundingBox']['Top']*height)),
-                    (int((face['BoundingBox']['Left']+face['BoundingBox']['Width'])*width),
-                    int((face['BoundingBox']['Top']+face['BoundingBox']['Height'])*height)),
-                    green if smile else red, frame_thickness)
-        emothions = face['Emotions']
-        i = 0
-        time.sleep(2)
-        for emothion in emothions:
-            cv2.putText(frame,
-                        str(emothion['Type']) + ": " + str(emothion['Confidence']),
-                        (25, 40 + (i * 25)),
-                        fontface,
-                        fontscale,
-                        color)
-            i += 1
-        dom_em_conf=emothions[0]['Confidence']
-        dom_em_type=emothions[0]['Type']
-        sec_em_conf=emothions[1]['Confidence']
-        sec_em_type=emothions[1]['Type']
-        
+
+        # Draw rectangle around faces
+        is_recognized = False
+        for face in faces['FaceDetails']:
+            smile = face['Smile']['Value']
+            cv2.rectangle(frame,
+                        (int(face['BoundingBox']['Left']*width),
+                        int(face['BoundingBox']['Top']*height)),
+                        (int((face['BoundingBox']['Left']+face['BoundingBox']['Width'])*width),
+                        int((face['BoundingBox']['Top']+face['BoundingBox']['Height'])*height)),
+                        green if smile else red, frame_thickness)
+            emothions = face['Emotions']
+            i = 0
+            time.sleep(2)
+            for emothion in emothions:
+                is_recognized = True
+
+                cv2.putText(frame,
+                            str(emothion['Type']) + ": " + str(emothion['Confidence']),
+                            (25, 40 + (i * 25)),
+                            fontface,
+                            fontscale,
+                            color)
+                i += 1
+            dom_em_conf=emothions[0]['Confidence']
+            dom_em_type=emothions[0]['Type']
+            sec_em_conf=emothions[1]['Confidence']
+            sec_em_type=emothions[1]['Type']
+
+        if not is_recognized:
+            print("顔が認識できません．カメラを確認して下さい")
+            continue
 
         if dom_em_conf-sec_em_conf>30:
             print(dom_em_type,dom_em_conf,'\n')
         else:
             print(dom_em_type,dom_em_conf)
             print(sec_em_type,sec_em_conf,'\n')
-    return [dom_em_type, dom_em_conf]
+
+        return [dom_em_type, dom_em_conf]
+
     #joblib.dump(dom_em_type, "dom_em_type.pkl", compress=True)
 
     # When everything done, release the capture
 
-    cap.release()
-    cv2.destroyAllWindows()
+    #cap.release()
+    #cv2.destroyAllWindows()
 
     # return 
 
