@@ -1,0 +1,110 @@
+<!doctype html>
+
+<html lang="ja">
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="refresh" content="10; URL=/">
+        <title>Document</title>
+        <title>team-f</title>
+        
+        <style type="text/css">
+        
+        p{
+            color: red;
+            font-size: 20px;
+        }
+
+        
+        
+        </style>
+
+    </head>
+    <body>
+        <h1><em>カメラから表情を読み取り感情を予想し円グラフにします</em></h1>
+        <hr>
+        <h3>現在の円グラフ(約10秒ごとに更新されます)</h3>
+         {{ dom_em_type[0] }}が{{dom_em_type[1]}}　％です
+        
+        <span id="view_time"></span>
+
+<script type="text/javascript">
+document.getElementById("view_time").innerHTML = getNow();
+
+function getNow() {
+	var now = new Date();
+	var year = now.getFullYear();
+	var mon = now.getMonth()+1; //１を足すこと
+	var day = now.getDate();
+	var hour = now.getHours();
+	var min = now.getMinutes();
+	var sec = now.getSeconds();
+
+	//出力用
+	var s = year + "年" + mon + "月" + day + "日" + hour + "時" + min + "分" + sec + "秒"; 
+	return s;
+}
+</script>
+        
+
+  <canvas id="myPieChart"></canvas>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+  <script>
+  
+  //
+  // flaskから受け取った変数定義してlabelsとdataに反映させて下さい
+  //
+  // let dom_em_type_js = {{ dom_em_type[0] }}
+  // let dom_em_conf_js = {{ dom_em_type[1] }}
+
+  // let others_rate = 100 - dom_em_conf_js
+
+  var ctx = document.getElementById("myPieChart");
+  var myPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ["calm(落ち着いている)", "disugusted(イライラ)", "suprised(驚き)", "sad(悲しみ)","happy(幸せ)","confused(困惑)","Angry(怒り)"],
+      // labels: [dom_em_type_js, "disugusted(イライラ)", "suprised(驚き)", "sad(悲しみ)","happy(幸せ)","confused(困惑)","Angry(怒り)"],
+      datasets: [{
+          backgroundColor: [
+              "#07EBEB",
+              "#BB5179",
+              "#58A27C",
+              "#3C00FF",
+              "#FAFF67",
+              "#CCB876",
+              "#EB1212"
+
+
+                
+          ],
+          data: [38, 4, 21, 10, 22, 2, 2,]　//数値指定
+          // data: [dom_em_conf_js, others_rate , 0, 0, 0, 0, 0,]　//数値指定
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: '感情予想'
+      }
+    }
+  });
+  </script>
+
+    <P>注意:カメラが起動中です.</P>
+
+   
+
+
+
+    </body>
+
+
+
+
+
+
+
+</html>

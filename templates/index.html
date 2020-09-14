@@ -1,0 +1,23 @@
+<title>Iris Predict App</title>
+<style>
+    #wrapper {
+        text-align: center;
+    }
+</style>
+<div id="wrapper">
+    <form method="post">
+        {{ form.SepalLength.label }}<br>
+        {{ form.SepalLength }}
+        <br>
+        {{ form.SepalWidth.label }}<br>
+        {{ form.SepalWidth }}
+        <br>
+        {{ form.PetalLength.label }}<br>
+        {{ form.PetalLength }}
+        <br>
+        {{ form.PetalWidth.label }}<br>
+        {{ form.PetalWidth }}
+        <br>
+        {{ form.submit }}
+    </form>
+</div>
