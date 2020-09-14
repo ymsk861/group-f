@@ -106,6 +106,8 @@ def aaa():
 
         # dom_em_type = joblib.load('./dom_em_type.pkl')
         # 顔データ送信 emotions : [{'Type': 'CALM', 'Confidence': 92.8204574584961}, {'Type': 'SURPRISED', 'Confidence': 3.136558771133423}, ...]
+        print(dom_em_type[0])
+        print(dom_em_type)
         return render_template('second.html', dom_em_type=dom_em_type)
 
 if __name__ == "__main__":
