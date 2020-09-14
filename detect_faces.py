@@ -58,7 +58,7 @@ def detect_face():
                     green if smile else red, frame_thickness)
         emothions = face['Emotions']
         i = 0
-        time.sleep(2)
+        ##time.sleep(3)
         for emothion in emothions:
             cv2.putText(frame,
                         str(emothion['Type']) + ": " + str(emothion['Confidence']),
@@ -78,7 +78,7 @@ def detect_face():
         else:
             print(dom_em_type,dom_em_conf)
             print(sec_em_type,sec_em_conf,'\n')
-    return [dom_em_type, dom_em_conf]
+        return [dom_em_type, dom_em_conf]
     #joblib.dump(dom_em_type, "dom_em_type.pkl", compress=True)
 
     # When everything done, release the capture
