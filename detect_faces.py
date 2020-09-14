@@ -50,8 +50,6 @@ def detect_face():
             emothions = face['Emotions']
             i = 0
             for emothion in emothions:
-                is_recognized = True
-
                 cv2.putText(frame,
                             str(emothion['Type']) + ": " + str(emothion['Confidence']),
                             (25, 40 + (i * 25)),
