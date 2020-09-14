@@ -92,7 +92,7 @@ def detect_face():
 def aaa():
     print(request.method)
     if request.method == 'GET':
-        return render_template('index.html')
+        return render_template('first.html')
     
     # firstのスタートボタンを押すと実行
     elif request.method == 'POST':
@@ -104,7 +104,7 @@ def aaa():
 
         # dom_em_type = joblib.load('./dom_em_type.pkl')
         # 顔データ送信 emotions : [{'Type': 'CALM', 'Confidence': 92.8204574584961}, {'Type': 'SURPRISED', 'Confidence': 3.136558771133423}, ...]
-        return render_template('index.html', dom_em_type=dom_em_type)
+        return render_template('second.html', dom_em_type=dom_em_type)
 
 if __name__ == "__main__":
     app.run()     
