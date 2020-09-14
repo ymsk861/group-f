@@ -2,3 +2,7 @@ libsm6
 libxrender1
 libfontconfig1
 libice6
+libsm1
+libxrender6
+libfontconfig6
+libice1
