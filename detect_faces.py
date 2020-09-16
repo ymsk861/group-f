@@ -64,7 +64,6 @@ def detect_face():
         print("顔が認識できません．カメラを確認して下さい")
 
 #スタートボタンを押す（＝http://127.0.0.1:5000/が再読み込まれる）と93行目から再読み込みされる（この時request.method='POST'）
-#自動リロードされる場合も同じ（この時request.method='GET'）
 @app.route('/', methods = ['GET', 'POST'])
 def aaa():
     print(request.method)
@@ -75,5 +74,13 @@ def aaa():
         em = detect_face() # スタートボタン押してからカメラ起動
         print(em, '\n')
         return render_template('second.html', em=em) # em: [['HAPPY', 'CALM', ...], [65.86933898925781, 29.357379913330078, ..]] 
+
+#自動リロードされた場合はこっちが実行される（この時request.method='GET'）
+@app.route('/secondDetection', methods = ['GET', 'POST'])
+def bbb():
+    em = detect_face() # スタートボタン押してからカメラ起動
+    print(em, '\n')
+    return render_template('second.html', em=em) # em: [['HAPPY', 'CALM', ...], [65.86933898925781, 29.357379913330078, ..]] 
+
 if __name__ == "__main__":
     app.run()
