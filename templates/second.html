@@ -12,15 +12,15 @@
             font-size: 20px;
         }
         </style>
-    </head>
     <body>
         <h1><em>カメラから表情を読み取り感情を予想し円グラフにします</em></h1>
         <hr>
         <h3>現在の円グラフ(約10秒ごとに更新されます)</h3>
-        <!-- 最上位の感情と割合 -->
-        {{ em[0][0] }}が{{ em[1][0] }}　％です
         
-        <span id="view_time"></span>
+        <span id="view_time"></span><br>
+        <!-- 最上位の感情と割合 -->
+        {{ em[0][0] }}が {{ em[1][0]|round(2) }}％です
+
 <script type="text/javascript">
 document.getElementById("view_time").innerHTML = getNow();
 function getNow() {
