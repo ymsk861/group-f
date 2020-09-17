@@ -13,14 +13,14 @@
         }
         </style>
     <body>
-        <h1><em>カメラから表情を読み取り感情を予想し円グラフにします</em></h1>
+      <center>
+        <h1><em>あなたの今の感情</em></h1>
         <hr>
-        <h3>現在の円グラフ(約10秒ごとに更新されます)</h3>
         
-        <span id="view_time"></span><br>
+        <span id="view_time"></span>取得（10秒ごとに更新されます）<br>
         <!-- 最上位の感情と割合 -->
-        {{ em[0][0] }}が {{ em[1][0]|round(2) }}％です
-
+        <h2>最上位の感情：{{ em[0][0] }} {{ em[1][0]|round(2) }}%</h2><br>
+      </center>
 <script type="text/javascript">
 document.getElementById("view_time").innerHTML = getNow();
 function getNow() {
@@ -44,33 +44,36 @@ function getNow() {
   let em_type_js = {{ em[0] | tojson }};
   let em_conf_js = {{ em[1] | tojson }};
 
-
+  var color = {'穏やか':'#7fff00', '楽しい':'#ffff00', '悲しい':'#0000ff', '怒り':'#ff0000', '困惑':'#bdb76b', 'うんざり':'#00bfff', '怖い':'#800080', '驚き':'#ff8c00'};
   var ctx = document.getElementById("myPieChart");
   var myPieChart = new Chart(ctx, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: [em_type_js[0], em_type_js[1], em_type_js[2], em_type_js[3], em_type_js[4], em_type_js[5], em_type_js[6], em_type_js[7]],
       datasets: [{
           backgroundColor: [
-              "#07EBEB",
-              "#BB5179",
-              "#58A27C",
-              "#3C00FF",
-              "#FAFF67",
-              "#CCB876",
-              "#EB1212"
+          color[em_type_js[0]], 
+          color[em_type_js[1]],
+          color[em_type_js[2]], 
+          color[em_type_js[3]], 
+          color[em_type_js[4]], 
+          color[em_type_js[5]], 
+          color[em_type_js[6]], 
+          color[em_type_js[7]]
           ],
           data: [em_conf_js[0], em_conf_js[1], em_conf_js[2], em_conf_js[3], em_conf_js[4], em_conf_js[5], em_conf_js[6], em_conf_js[7]]　//数値指定
       }]
     },
     options: {
-      title: {
-        display: true,
-        text: '感情予想'
-      }
+      responsive: true,
+      legend: {
+        position: 'top'
+      }      
     }
   });
   </script>
-    <P>注意:カメラが起動中です.</P>
+  <center>
+    <P>カメラが起動中です</P>
+  </center>
     </body>
 </html>
