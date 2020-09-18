@@ -50,9 +50,10 @@ def detect_face():
 
             em_type = []
             em_conf = []
+            em_type_dict = {'CALM':'穏やか', 'HAPPY':'楽しい', 'SAD':'悲しい', 'ANGRY':'怒り', 'CONFUSED':'困惑', 'DISGUSTED':'うんざり', 'FEAR':'怖い', 'SURPRISED':'驚き'}
 
             for em in emothions:
-                em_type.append(em['Type'])
+                em_type.append(em_type_dict[em['Type']])
                 em_conf.append(em['Confidence'])
             print(emothions, '\n')
             print(em_type, '\n')
